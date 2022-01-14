@@ -1,5 +1,18 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
+QBCore.Functions.CreateCallback('qb-npwd:HasPhone', function(source, cb)
+  local Player = QBCore.Functions.GetPlayer(source)
+
+  local hasPhone = false
+  for _,phone in ipairs(Config.PhoneList) do
+    if Player.Functions.GetItemByName(phone) then 
+      hasPhone = true 
+      break;
+    end
+  end
+  cb(hasPhone)
+end)
+
 AddEventHandler('QBCore:Server:PlayerLoaded', function(qbPlayer)
   local playerIdent = qbPlayer.PlayerData.citizenid
   local phoneNumber = tostring(qbPlayer.PlayerData.charinfo.phone)
