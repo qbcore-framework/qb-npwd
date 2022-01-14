@@ -1,5 +1,5 @@
 Config = {}
 
 Config.PhoneList = {
-    'phone'
+    ['phone'] = 1,
 }
