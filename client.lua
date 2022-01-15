@@ -39,7 +39,12 @@ end)
 
 -- Handles state if resource is restarted live.
 AddEventHandler('onResourceStart', function(resource)
-    if GetCurrentResourceName() == resource then
+    if GetCurrentResourceName() == resource and GetResourceState('npwd') == 'started' then
         DoPhoneCheck(QBCore.Functions.GetPlayerData().items)
     end
+end)
+
+-- Allows use of phone as an item.
+RegisterNetEvent('qb-npwd:client:setPhoneVisible', function(isPhoneVisible)
+    exports['npwd']:setPhoneVisible(isPhoneVisible)
 end)
