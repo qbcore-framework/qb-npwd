@@ -3,13 +3,13 @@ local hasPhone = false
 
 local function DoPhoneCheck(PlayerItems)
     hasPhone = false
-    
-    if PlayerItems then
-        for _,item in pairs(PlayerItems) do
-            if Config.PhoneList[item.name] then
-                hasPhone = true
-                break;
-            end
+
+    if not PlayerItems then return end
+
+    for _,item in pairs(PlayerItems) do
+        if Config.PhoneList[item.name] then
+            hasPhone = true
+            break;
         end
     end
 
