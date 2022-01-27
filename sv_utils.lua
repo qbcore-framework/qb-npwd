@@ -30,3 +30,11 @@ function printTable(tbl, indent)
     end
   end
 end
+
+function getTableKeys(tbl)
+  local keys = {}
+  for k,_ in pairs(tbl) do
+    keys[#keys+1] = k
+  end
+  return keys
+end

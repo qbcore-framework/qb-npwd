@@ -40,3 +40,7 @@ AddEventHandler('onServerResourceStart', function(resName)
     })
   end
 end)
+
+QBCore.Functions.CreateUseableItem(getTableKeys(Config.PhoneList), function(source, item)
+  TriggerClientEvent('qb-npwd:client:setPhoneVisible', source, true)
+end)
