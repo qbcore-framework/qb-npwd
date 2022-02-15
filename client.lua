@@ -2,17 +2,16 @@ local QBCore = exports['qb-core']:GetCoreObject()
 local hasPhone = false
 
 local function DoPhoneCheck(PlayerItems)
-    hasPhone = false
-
-    if not PlayerItems then return end
+    local _hasPhone = false
 
     for _,item in pairs(PlayerItems) do
         if Config.PhoneList[item.name] then
-            hasPhone = true
+            _hasPhone = true
             break;
         end
     end
 
+    hasPhone = _hasPhone
     exports['npwd']:setPhoneDisabled(not hasPhone)
 end
 
@@ -29,7 +28,7 @@ end)
 
 -- Resets state on logout, in case of character change.
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
-    DoPhoneCheck(nil)
+    DoPhoneCheck({})
 end)
 
 -- Handles state when PlayerData is changed. We're just looking for inventory updates.
