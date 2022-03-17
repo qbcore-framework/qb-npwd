@@ -15,7 +15,7 @@ If you wish to require a player to have a phone item in there inventory, you mus
 1. Navigate to the `config.json` in `NPWD` and change the following settings under `PhoneAsItem`:
 	a. `enabled` to `true`
 	b. `exportResource` to `qb-npwd`
-	c. `exportResource` to `HasPhone`
+	c. `exportFunction` to `HasPhone`
 2. Navigate to the `config.lua` in `qb-npwd` and verify all the items you want to work as a phone are listed.
 
 ## Other Features
