@@ -18,7 +18,7 @@ AddEventHandler('QBCore:Server:PlayerLoaded', function(qbPlayer)
   debugPrint(('Loaded new player. S: %s, Iden: %s, Num: %s'):format(playerSrc, playerIdent, phoneNumber))
 end)
 
-AddEventHandler('QBCore:Client:OnPlayerUnload', function(src)
+RegisterNetEvent("qb-npwd:server:UnloadPlayer", function(src)
   exports.npwd:unloadPlayer(src)
 end)
 

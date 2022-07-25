@@ -29,6 +29,7 @@ end)
 -- Resets state on logout, in case of character change.
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     DoPhoneCheck({})
+    TriggerServerEvent("qb-npwd:server:UnloadPlayer")
 end)
 
 -- Handles state when PlayerData is changed. We're just looking for inventory updates.
