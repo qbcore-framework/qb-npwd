@@ -10,7 +10,7 @@ AddEventHandler('QBCore:Server:PlayerLoaded', function(qbPlayer)
 
   exports.npwd:newPlayer({
     source = playerSrc,
-    phoneNumber = charInfo.phone,
+    phoneNumber = tostring(charInfo.phone),
     identifier = playerIdent,
     firstname = charInfo.firstname,
     lastname = charInfo.lastname
@@ -34,7 +34,7 @@ AddEventHandler('onServerResourceStart', function(resName)
     exports.npwd:newPlayer({
       source = v.PlayerData.source,
       identifier = v.PlayerData.citizenid,
-      phoneNumber = v.PlayerData.charinfo.phone,
+      phoneNumber = tostring(v.PlayerData.charinfo.phone),
       firstname = v.PlayerData.charinfo.firstname,
       lastname = v.PlayerData.charinfo.lastname,
     })
