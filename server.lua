@@ -18,7 +18,8 @@ AddEventHandler('QBCore:Server:PlayerLoaded', function(qbPlayer)
   debugPrint(('Loaded new player. S: %s, Iden: %s, Num: %s'):format(playerSrc, playerIdent, phoneNumber))
 end)
 
-RegisterNetEvent("qb-npwd:server:UnloadPlayer", function(src)
+RegisterNetEvent("qb-npwd:server:UnloadPlayer", function(svsrc)
+  local src = source or svsrc
   exports.npwd:unloadPlayer(src)
 end)
 
