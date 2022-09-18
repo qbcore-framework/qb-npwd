@@ -18,8 +18,8 @@ AddEventHandler('QBCore:Server:PlayerLoaded', function(qbPlayer)
   debugPrint(('Loaded new player. S: %s, Iden: %s, Num: %s'):format(playerSrc, playerIdent, phoneNumber))
 end)
 
-RegisterNetEvent("qb-npwd:server:UnloadPlayer", function(src)
-  exports.npwd:unloadPlayer(src)
+RegisterNetEvent("qb-npwd:server:UnloadPlayer", function()
+  exports.npwd:unloadPlayer(source)
 end)
 
 local currentResName = GetCurrentResourceName()
