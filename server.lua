@@ -19,7 +19,8 @@ AddEventHandler('QBCore:Server:PlayerLoaded', function(qbPlayer)
 end)
 
 RegisterNetEvent("qb-npwd:server:UnloadPlayer", function()
-  exports.npwd:unloadPlayer(source)
+  local src = source
+  exports.npwd:unloadPlayer(src)
 end)
 
 local currentResName = GetCurrentResourceName()
