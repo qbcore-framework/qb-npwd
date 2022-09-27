@@ -1,9 +1,9 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local hasPhone = false
 
-local function DoPhoneCheck(PlayerItems)
+local function DoPhoneCheck(PlayerData)
     local _hasPhone = false
-
+    local PlayerItems = PlayerData.items or {}
     for _,item in pairs(PlayerItems) do
         if Config.PhoneList[item.name] then
             _hasPhone = true
@@ -12,7 +12,22 @@ local function DoPhoneCheck(PlayerItems)
     end
 
     hasPhone = _hasPhone
-    exports['npwd']:setPhoneDisabled(not hasPhone)
+    local isDead = (PlayerData.metadata["isdead"] or PlayerData.metadata['inlaststand']) or false
+    local isCuffed = PlayerData.metadata["ishandcuffed"] or false
+    local disabled = false
+    if not Config.UseWhileDead and isDead then
+        disabled = true
+    end
+    if not Config.UseWhileCuffed and isCuffed then
+        disabled = true
+    end
+    if Config.PhoneAsItem and not hasPhone then
+        disabled = true
+    end
+    exports['npwd']:setPhoneDisabled(disabled)
+    if exports['npwd']:isPhoneVisible() then
+        exports['npwd']:setPhoneVisible(false)
+    end
 end
 
 local function HasPhone()
@@ -23,7 +38,7 @@ exports("HasPhone", HasPhone)
 
 -- Handles state right when the player selects their character and location.
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
-    DoPhoneCheck(QBCore.Functions.GetPlayerData().items)
+    DoPhoneCheck(QBCore.Functions.GetPlayerData())
 end)
 
 -- Resets state on logout, in case of character change.
@@ -34,13 +49,13 @@ end)
 
 -- Handles state when PlayerData is changed. We're just looking for inventory updates.
 RegisterNetEvent('QBCore:Player:SetPlayerData', function(PlayerData)
-    DoPhoneCheck(PlayerData.items)
+    DoPhoneCheck(PlayerData)
 end)
 
 -- Handles state if resource is restarted live.
 AddEventHandler('onResourceStart', function(resource)
     if GetCurrentResourceName() == resource and GetResourceState('npwd') == 'started' then
-        DoPhoneCheck(QBCore.Functions.GetPlayerData().items)
+        DoPhoneCheck(QBCore.Functions.GetPlayerData())
     end
 end)
 
