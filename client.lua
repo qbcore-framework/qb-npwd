@@ -25,7 +25,7 @@ local function DoPhoneCheck(PlayerData)
         disabled = true
     end
     exports['npwd']:setPhoneDisabled(disabled)
-    if exports['npwd']:isPhoneVisible() then
+    if exports['npwd']:isPhoneVisible() and disabled then
         exports['npwd']:setPhoneVisible(false)
     end
 end
