@@ -4,7 +4,8 @@ local hasPhone = false
 local function DoPhoneCheck(PlayerData)
     local _hasPhone = false
     local PlayerItems = PlayerData.items or {}
-    for _,item in pairs(PlayerItems) do
+    local metadata = PlayerData.metadata or {}
+    for _, item in pairs(PlayerItems) do
         if Config.PhoneList[item.name] then
             _hasPhone = true
             break;
@@ -12,8 +13,8 @@ local function DoPhoneCheck(PlayerData)
     end
 
     hasPhone = _hasPhone
-    local isDead = (PlayerData.metadata["isdead"] or PlayerData.metadata['inlaststand']) or false
-    local isCuffed = PlayerData.metadata["ishandcuffed"] or false
+    local isDead = (metadata["isdead"] or metadata['inlaststand']) or false
+    local isCuffed = metadata["ishandcuffed"] or false
     local disabled = false
     if not Config.UseWhileDead and isDead then
         disabled = true
@@ -21,19 +22,16 @@ local function DoPhoneCheck(PlayerData)
     if not Config.UseWhileCuffed and isCuffed then
         disabled = true
     end
-    if Config.PhoneAsItem and not hasPhone then
-        disabled = true
-    end
-    exports['npwd']:setPhoneDisabled(disabled)
     if exports['npwd']:isPhoneVisible() and disabled then
         exports['npwd']:setPhoneVisible(false)
     end
+    exports['npwd']:setPhoneDisabled(disabled)
 end
 
 local function HasPhone()
     return hasPhone
 end
-  
+
 exports("HasPhone", HasPhone)
 
 -- Handles state right when the player selects their character and location.
