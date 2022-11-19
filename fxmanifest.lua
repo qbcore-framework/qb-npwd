@@ -1,8 +1,8 @@
 fx_version 'cerulean'
 game 'gta5'
-description 'A simple bridge resource for QB Compatibility for NPWD'
 
-lua54 'yes'
+description 'A simple bridge resource for QB Compatibility for NPWD'
+version '1.0.0'
 
 client_script 'client.lua'
 
@@ -13,3 +13,5 @@ server_scripts {
 }
 
 shared_script 'config.lua'
+
+lua54 'yes'
