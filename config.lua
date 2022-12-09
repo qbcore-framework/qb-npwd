@@ -4,3 +4,7 @@ Config = {}
 Config.PhoneList = {
     ['phone'] = true,
 }
+
+Config.UseWhileDead = false
+
+Config.UseWhileCuffed = false
