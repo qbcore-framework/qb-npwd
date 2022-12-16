@@ -1,7 +1,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local hasPhone = false
 
-local function DoPhoneCheck(PlayerItems)
+local function DoPhoneCheck(PlayerItems, isDead, inLastStand, isHandcuffed)
     local _hasPhone = false
 
     for _,item in pairs(PlayerItems) do
@@ -12,7 +12,8 @@ local function DoPhoneCheck(PlayerItems)
     end
 
     hasPhone = _hasPhone
-    exports['npwd']:setPhoneDisabled(not hasPhone)
+    local canUse = not isHandcuffed and not (isDead or inLastStand)
+    exports['npwd']:setPhoneDisabled(not (hasPhone and canUse))
 end
 
 local function HasPhone()
@@ -34,7 +35,7 @@ end)
 
 -- Handles state when PlayerData is changed. We're just looking for inventory updates.
 RegisterNetEvent('QBCore:Player:SetPlayerData', function(PlayerData)
-    DoPhoneCheck(PlayerData.items)
+    DoPhoneCheck(PlayerData.items, PlayerData.metadata["isdead"], PlayerData.metadata["inlaststand"], PlayerData.metadata["ishandcuffed"])
 end)
 
 -- Handles state if resource is restarted live.
